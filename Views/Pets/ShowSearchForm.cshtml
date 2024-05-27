@@ -1,0 +1,33 @@
+﻿
+<h4>Search for a Pet!</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ShowSearchResults">
+            <div class="form-group">
+                <label for="SearchName" class="control-label">Name</label>
+                <input name="SearchName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="SearchDescription" class="control-label">Description</label>
+                <input name="SearchDescription" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="SearchType" class="control-label">Type</label>
+                <input name="SearchType" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="SearchLocation" class="control-label">Location</label>
+                <input name="SearchLocation" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Pets">Back to List</a>
+</div>
+

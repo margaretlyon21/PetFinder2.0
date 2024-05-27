@@ -1,0 +1,31 @@
+﻿@model IEnumerable<PetFinder2._0.Models.Pet>
+@{
+    ViewData["Title"] = "My Pets";
+}
+
+<h1>Lost Pets</h1>
+
+@foreach(var pet in Model)
+{
+
+    <div class="container" style="background-color: pink; margin-top:50px; margin-bottom:50px; padding: 20px; border-radius: 20px">
+        <div class="row">
+            <div class="col col-xs-6 col-lg-5">
+                <img src="~/Images/@pet.ImagePath" style="max-width: 400px; max-height: 400px;" />
+            </div>
+            <div class="col col-xs-6 col-lg-7">
+                <h5><a asp-action="Details" asp-route-id="@pet.ID" style="color: black;">Details</a></h5>
+            </div>
+            <div>
+                <p>@pet.Description</p>
+            </div>
+            <div>
+                <p>Location: @pet.Location</p>
+            </div>
+        </div>
+    </div>
+}
+@if (!Model.Any())
+{
+    <p>You have no active posts!</p>
+}

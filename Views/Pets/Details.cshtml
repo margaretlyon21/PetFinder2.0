@@ -1,0 +1,61 @@
+﻿@model PetFinder2._0.Models.Pet
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> userManager
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<div class="description">
+    Name: @Model.Name
+    Location: @Model.Location
+    Type: @Model.Type
+    Description: @Model.Description
+    <img src="~/Images/@Model.ImagePath" style="max-width: 400px; max-height: 400px;" />
+
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container">
+        <form asp-action="AddComment" method="post">
+            <h6>Add Comment</h6>
+            <textarea class="form-control" aria-label="With textarea" name="Content" style="width: 40%; vertical-align:top;"></textarea>
+            <input type="hidden" name="IdentityUserId" class="form-control" value="@userManager.GetUserId(User)" />
+            <input type="hidden" name="ID" class="form-control" value="@Model.ID" />
+            <input type="submit" class="btn btn-primary" style="display: inline-block; margin-top:10px;" />
+        </form>
+    </div>
+}
+else
+{
+    <div class="container">
+        <form asp-action="AddComment" method="post">
+            <h6>Add Comment</h6>
+            <textarea class="form-control" aria-label="With textarea" name="Content" style="width: 40%; vertical-align:top;"></textarea>
+            <input type="submit" disabled class="btn btn-primary" style="display: inline-block; margin-top:10px;" />
+        </form>
+    </div>
+}
+
+<br />
+
+<div class="container">
+    <h6>Comments</h6>
+    @if (Model != null && Model.Comments != null)
+    {
+        foreach (var comment in Model.Comments)
+        {
+            <div style="border:1px solid lightgrey; margin: 10px; padding: 10px; border-radius: 10px; width: 40%;">
+                <p>@comment.Name - @comment.User.UserName</p>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No comments available.</p>
+    }
+</div>
+
+
